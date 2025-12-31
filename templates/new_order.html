@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="/new_order" method="POST" id="order-form">
+    <div class="dashboard-grid">
+        <!-- Main Product Grid -->
+        <div class="main-content" style="grid-column: 2; padding: 0; background: transparent; box-shadow: none;">
+            <div
+                style="background: var(--surface); padding: 30px; border-radius: 20px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);">
+                <div class="flex-between" style="margin-bottom: 20px;">
+                    <h2 class="page-title" style="margin-bottom: 0;">Select Items</h2>
+                    <input type="text" id="product-search" placeholder="Search products..." style="max-width: 300px;">
+                </div>
+
+                <div class="product-grid"
+                    style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;">
+                    {% for product in products %}
+                    <div class="card" style="margin:0; transition: 0.2s;" id="card-{{ product.product_id }}">
+                        <div style="font-weight: 700; font-size: 1.1em; margin-bottom: 5px;">{{ product.name }}</div>
+                        <div style="color: var(--text-sub); font-size: 0.9em; margin-bottom: 15px;">₹{{
+                            "%.2f"|format(product.price) }} / {{ product.unit }}</div>
+
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <input type="number" name="qty_{{ product.product_id }}" class="qty-input"
+                                data-price="{{ product.price }}" placeholder="0" min="0"
+                                style="text-align: center; font-weight: 700;">
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar / Cart Summary -->
+        <div class="sidebar" style="grid-column: 1; grid-row: 1;">
+            <div class="stat-card" style="position: sticky; top: 20px;">
+                <h3 style="margin-top: 0; color: var(--text-sub); font-size: 0.9em; text-transform: uppercase;">Customer
+                    Info</h3>
+                <div class="form-group">
+                    <input type="text" name="customer_name" placeholder="Customer Name" required
+                        style="border: 2px solid var(--primary);">
+                </div>
+                <div class="form-group">
+                    <textarea name="customer_address" placeholder="Delivery Address" required
+                        style="border: 2px solid var(--primary); font-family: 'Outfit', sans-serif;"></textarea>
+                </div>
+
+                <div style="margin-top: 30px; border-top: 2px solid var(--bg-color); padding-top: 20px;">
+                    <div class="stat-label">Estimated Total</div>
+                    <div class="stat-val" style="color: var(--primary);">₹<span id="total-display">0.00</span></div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <button type="submit" class="btn btn-modern btn-block" style="background: #10b981;">Complete
+                        Order</button>
+                    <a href="/" class="btn btn-small btn-block"
+                        style="margin-top: 10px; background: transparent; color: var(--text-sub);">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<style>
+    /* Responsive Override for this page */
+    @media (max-width: 768px) {
+        .dashboard-grid {
+            display: flex;
+            flex-direction: column-reverse;
+            /* Put cart at top visually? No, form input at top */
+        }
+
+        .sidebar {
+            grid-row: auto !important;
+        }
+
+        .dashboard-grid {
+            display: block;
+        }
+
+        .sidebar {
+            margin-bottom: 30px;
+        }
+    }
+
+    .card.active-selection {
+        border: 2px solid var(--primary);
+        background: #eef2ff;
+    }
+</style>
+{% endblock %}

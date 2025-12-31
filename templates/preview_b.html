@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design B: Glass Command</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #020617;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --accent: #f97316;
+            /* Orange */
+            --text-primary: #f1f5f9;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+            margin: 0;
+            padding: 40px;
+            background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, #020617 75%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .brand {
+            font-size: 1.5em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--accent);
+        }
+
+        .nav a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+
+        .nav a.active {
+            color: #fff;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+        }
+
+        th {
+            text-align: left;
+            color: rgba(255, 255, 255, 0.4);
+            padding: 10px 20px;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 1px;
+        }
+
+
+        tr td:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        tr td:last-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.08);
+            transform: scale(1.01);
+            transition: 0.2s;
+        }
+
+        .status-dot {
+            height: 8px;
+            width: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            box-shadow: 0 0 8px var(--accent);
+        }
+
+        .btn-glass {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.1em;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-glass:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="glass-panel">
+            <div class="header">
+                <div class="brand">COMMAND CENTER</div>
+                <div class="nav">
+                    <a href="#" class="active">Overview</a>
+                    <a href="#">Logistics</a>
+                    <a href="#">Deploy</a>
+                </div>
+            </div>
+
+            <h2 style="font-weight: 400; margin-bottom: 20px; color: rgba(255,255,255,0.8)">Recent Transmissions</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Commander</th>
+                        <th>Time Log</th>
+                        <th>Credits</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#1024</td>
+                        <td>Cmdr. Sheppard</td>
+                        <td>14:30 ZULU</td>
+                        <td><span class="status-dot"></span>145.50</td>
+                    </tr>
+                    <tr>
+                        <td>#1025</td>
+                        <td>Capt. Kirk</td>
+                        <td>16:45 ZULU</td>
+                        <td><span class="status-dot"></span>89.99</td>
+                    </tr>
+                    <tr>
+                        <td>#1026</td>
+                        <td>Master Chief</td>
+                        <td>09:12 ZULU</td>
+                        <td><span class="status-dot"></span>210.00</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button class="btn-glass">INITIATE REQUISITION</button>
+        </div>
+    </div>
+</body>
+
+</html>
